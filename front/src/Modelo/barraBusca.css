@@ -1,0 +1,49 @@
+.barra{
+    display:block;
+    padding:0px;
+    margin:0;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 10px 4px 6px black;
+}
+
+.barra svg{
+    margin: 2px;
+}
+
+.barra input[type="text"]{
+    display: inline;
+    border:none;
+    resize: none;
+    outline: none;
+    width: 90%;
+}
+
+.resultado {
+    width: 100%;
+}
+
+.resultado ul{
+    display: none;
+    position: absolute;
+    float:left;
+    border: 1px solid black;
+    box-shadow: 10px 4px 6px black;
+    margin: 0;
+    padding: 1px;
+    background-color: beige;
+    width: 60%;
+    
+}
+
+.resultado li{
+    list-style-type: none;
+    margin: 0;
+    padding: 3px;
+    border-bottom: 1px;
+}
+
+.resultado li:hover{
+    background-color: rgb(136, 130, 130);
+    color: white
+}

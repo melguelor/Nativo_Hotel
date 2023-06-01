@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'MinhaFonte';
+    src: url('Itim-Regular.ttf');
+}
+
+
+.fonteItim{
+
+    
+    font-family: 'MinhaFonte';
+}

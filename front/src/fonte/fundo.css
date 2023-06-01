@@ -1,0 +1,23 @@
+.fundologo{
+
+background-color: cornflowerblue;
+border: 2px saddlebrown;background-color: rgba(10,23,55,0.8);
+}
+
+
+.fundoresto{
+    
+   
+    background-size: cover;background-color: rgba(10,23,55,0.8);
+}
+
+body{
+    
+    background-image: url(tentivaFundo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    
+    
+    
+}
