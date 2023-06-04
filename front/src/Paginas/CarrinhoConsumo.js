@@ -58,14 +58,14 @@ export default function CarrinhoConsumo(props)
             return item.nome === reserva.idHospede
         }))
         
-        console.log(lista)
+        //console.log(lista)
     
     })
       .catch(err => console.log(err));
     }
         useEffect (() => {
           carregar();
-          
+          carregarSelecao();
           
         }, []);
 
@@ -74,12 +74,14 @@ export default function CarrinhoConsumo(props)
 
    const [listaProdutos,setListaProdutos] = useState([
   {  
-    id: "", 
-    nome:  "2",
-    valorUnitario:  "",
-    data: "",
-    valorUnitario: ""
-  },
+    id:"", 
+    nome:"",
+     data:"",
+     quantidade:"",
+    valorUnitario:"",
+    ValorTotal:0
+    
+  }
   
    
    ])
@@ -97,6 +99,155 @@ export default function CarrinhoConsumo(props)
     }
   };
 
+/*
+const [lista,setLista] = useState([
+        {
+          id: "", 
+          cpf:  "",
+        nome:  "",
+        telefone: "",
+        rua:  "",
+        cep:  "",
+        tipo: "",
+        numero: ""
+          
+        }])
+
+
+*/
+
+
+ const [listagem,setListagem] = useState([
+    {id:"",
+     nome:"",
+     valor:""
+    }
+ ])
+
+
+
+  function carregarSelecao()
+  {
+     fetch('http://localhost:4000/produto/', {
+      method: "GET",
+      headers: {"Content-type": "application/json;charset=UTF-8"}
+    })
+    .then(response => response.json()) 
+    .then(json => {
+      
+        setListagem(json)
+       
+  })
+    .catch(err => console.log(err));
+  }
+
+
+ const [temporario,setTemporario] = useState({})
+
+
+
+
+ function addLista()
+ {
+    /* const novalista = listaProdutos.push(
+        { id:6, 
+        nome:"",
+         data:"",
+         quantidade:2,
+        valorUnitario:"",
+        ValorTotal:0}
+    ) 
+
+    setListaProdutos([novalista])*/
+    const novoProduto = {
+        id: temporario.id,
+        nome: temporario.nome,
+        data: '01/01/2022',
+        quantidade: temporario.quantidade,
+        valorUnitario: temporario.valor,
+        ValorTotal:22
+        
+    };
+
+   listaProdutos.push(novoProduto);
+        const tabela = document.querySelector('#tabela');
+        const conteudoHTML = listaProdutos.map((produto) => `
+            <tr>
+                <td>${produto.id}</td>
+                <td>${produto.nome}</td>
+                <td>${produto.data}</td>
+                <td>${produto.quantidade}</td>
+                <td>${produto.valorUnitario}</td>
+                <td>${produto.quantidade * produto.valorUnitario}</td>
+                
+            </tr>
+        `).join('');
+        tabela.innerHTML = conteudoHTML;
+    
+
+   
+
+
+    
+ 
+           
+
+           
+
+ }
+
+
+ function listarTabela()
+ {
+    const tabela = document.querySelector('#tabela')
+    
+    let conteudoHTML = `
+    ${listaProdutos.map((produto) => `
+        <tr>
+            <td>${produto.nome}</td>
+            <td>${produto.data}</td>
+            <td>${produto.quantidade}</td>
+            <td>${produto.valorUnitario}</td>
+            <td>${produto.quantidade * produto.valorUnitario}</td>
+            <td><Button>-</Button></td>
+            <td><Button>+</Button></td>
+        </tr>
+    `).join('')}
+`;
+tabela.innerHTML = conteudoHTML
+   
+    console.log(tabela)
+       /* 
+       
+       {
+       listaProdutos.map((produto)=>{
+
+            return <tr >
+          
+           <td>{produto.nome}</td>
+           <td>{produto.data}</td>
+           <td>{produto.quantidade}</td>
+           <td>{produto.valorUnitario}</td>
+           <td>{produto.ValorTotal = produto.quantidade * produto.valorUnitario}</td>
+           <td><Button>-</Button></td>
+           <td><Button>+</Button></td>
+           
+       
+       
+       
+           
+       
+       
+       </tr>
+       
+       
+       })}*/
+    
+
+
+ } 
+
+
 
 
 
@@ -104,7 +255,7 @@ export default function CarrinhoConsumo(props)
     return(
         <>
         <Pagina coluna="col">
-       
+      
         <p className="text-center">Carrinho de Consumo</p>
 
         <Row className=" mx-auto text-center">
@@ -197,10 +348,12 @@ export default function CarrinhoConsumo(props)
                 <Card.Body className="border ">
                     <Col className="col-5 mx-auto">
                     <CaixaSelecao 
-                    fonte={valor}  
-                    campoExibir={'s'}  
-                     chave={'s'} 
+                    fonte={listagem}  
+                    campoExibir={'nome'}  
+                     chave={'id'} 
                      nomeLabel={"Selecionar Produto"}
+                     funcaoSelecao={setTemporario}
+
                     />
                     </Col>
 
@@ -209,7 +362,7 @@ export default function CarrinhoConsumo(props)
                        <Row>
                          <Col className="col-7"> 
                          <Form.Label>Nome</Form.Label>
-                          <Form.Control />
+                          <Form.Control value={temporario.nome}  />
                         </Col>
                         
                         <Col className="col-2">
@@ -229,17 +382,24 @@ export default function CarrinhoConsumo(props)
 
                         <Col className="col-3"> 
                           <Form.Label>Valor Unitario</Form.Label>
-                          <Form.Control value={1}/>
+                          <Form.Control value={temporario.valor * quantidade}/>
                         </Col>
-
+                        <Col className="mx-auto p-2 text-center col-3">
+                        <Button
+                            onClick={addLista}
+                        >
+                            Adicionar Produto a Lista
+                        </Button>
+                        </Col>
+                       
                         
                        </Row>
                       
-                        <Row className="col-4 mx-auto m-2">
+                        <Row className="col-5 mx-auto m-2">
                         <Card  border={true}  className="small ">
                 <Card.Header className="border">
                     <Card.Title className="text-center text-uppercase font-weight-bold">
-                        Valor Total
+                        Valor Total da Tabela
                     </Card.Title>
                 </Card.Header>
 
@@ -281,44 +441,24 @@ export default function CarrinhoConsumo(props)
           <th>valor Unitario</th>
           
           <th>Valor Total</th>
-          <th>Remover</th>
-          <th>Adicionar </th>
+          
           
          
           
         </tr>
       </thead>
-      <tbody>
-
-    {listaProdutos.map((produto)=>{
-    console.log('a')
-            return  <tr >
-            <td>s</td>
-            <td>s</td>
-            <td>s</td>
-            <td>s</td>
-            <td>s</td>
-            <td>s</td>
-            <td>-</td>
-            <td>+</td>
-            
-       
-
-        
-            
-        
-  
-        </tr>
-
-
-    })}
+      <tbody id="tabela">
+         
         
     
    
 
       </tbody>
       </Table>
+       
         </Row>
+
+        <Row className="mx-auto col-2"><Button>Salvar</Button></Row>
 
 
 
