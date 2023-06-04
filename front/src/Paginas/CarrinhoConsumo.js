@@ -6,19 +6,7 @@ import { useState,useEffect } from "react"
 import {Form,Row,Button,Modal,InputGroup,Col,Card,Table,FormControl} from 'react-bootstrap'
 import CaixaSelecao from "../Modelo/CaixaSelecao";
 
-const valor = 
-[
-    {
-        "id":"1",
-        "nome": "Victor"
-    },
-    
-    {
-        "id":"2",
-        "nome": "Leandro"
-    },
 
-]
 
 export default function CarrinhoConsumo(props)
 {
@@ -73,15 +61,7 @@ export default function CarrinhoConsumo(props)
 
 
    const [listaProdutos,setListaProdutos] = useState([
-  {  
-    id:"", 
-    nome:"",
-     data:"",
-     quantidade:"",
-    valorUnitario:"",
-    ValorTotal:0
-    
-  }
+  
   
    
    ])
@@ -124,6 +104,7 @@ const [lista,setLista] = useState([
     }
  ])
 
+ const [total,setTotal] = useState(0)
 
 
   function carregarSelecao()
@@ -142,7 +123,7 @@ const [lista,setLista] = useState([
   }
 
 
- const [temporario,setTemporario] = useState({})
+ const [temporario,setTemporario] = useState({valor:0})
 
 
 
@@ -159,26 +140,52 @@ const [lista,setLista] = useState([
     ) 
 
     setListaProdutos([novalista])*/
+//AQUI ESTOU GERANDO UM OBJETO PARA INSERIR NA TABELA
+    
+    const dataAtual = new Date();
+    const dia = dataAtual.getDate();
+    const mes = dataAtual.getMonth() + 1; 
+    const ano = dataAtual.getFullYear(); 
+    
+   
+    
+    //vou utilizar esse novo produto como forma de enviar ao back end a tabela com todos os campos necessario
+    /*
+    novoProduto será responsavel por salvar os dados da tabela + a chave estrangeria da reserva e qual hospede está
+    já que pode ter outra tabela se o hospede fizer outra reserva
+
+    importante: não vou salvar o valor total de todos os produtos, pois acredito que um sql caso seja necesario
+    fara o serviço do que abrir mais uma coluna com o valor total totalmente replicado ou fazer uma tabela só para isso
+    quando é melhor apenas uma consulta no sql 
+
+    id, nomeProduto,dataPedida,qtde,valorUnitario,idHospede,idReserva
+    */
+    setTotal((total + (quantidade * temporario.valor)))
+    
     const novoProduto = {
         id: temporario.id,
         nome: temporario.nome,
-        data: '01/01/2022',
-        quantidade: temporario.quantidade,
+        data:  dia +"/"+ mes +"/"+ ano,
+        quantidade: quantidade,
         valorUnitario: temporario.valor,
-        ValorTotal:22
+        ValorTotal: quantidade * temporario.valor
         
     };
 
+
+   
    listaProdutos.push(novoProduto);
+
+//ESTOU APENAS MOSTRANDO OS VALORES ATUALIZANDO A TABELA JÁ ADICIONADA NO FUNDO
         const tabela = document.querySelector('#tabela');
         const conteudoHTML = listaProdutos.map((produto) => `
             <tr>
                 <td>${produto.id}</td>
                 <td>${produto.nome}</td>
-                <td>${produto.data}</td>
+                <td>${produto.data }</td>
                 <td>${produto.quantidade}</td>
                 <td>${produto.valorUnitario}</td>
-                <td>${produto.quantidade * produto.valorUnitario}</td>
+                <td>${produto.ValorTotal}</td>
                 
             </tr>
         `).join('');
@@ -382,7 +389,7 @@ tabela.innerHTML = conteudoHTML
 
                         <Col className="col-3"> 
                           <Form.Label>Valor Unitario</Form.Label>
-                          <Form.Control value={temporario.valor * quantidade}/>
+                          <Form.Control value={(temporario.valor * quantidade)}/>
                         </Col>
                         <Col className="mx-auto p-2 text-center col-3">
                         <Button
@@ -404,7 +411,7 @@ tabela.innerHTML = conteudoHTML
                 </Card.Header>
 
                 <Card.Body className="border ">
-                    <p className="text-center h1">R$ 42.822,90</p>
+                    <p className="text-center h1"> R$ {total.toFixed(2)}</p>
                     
                     
                 </Card.Body>
