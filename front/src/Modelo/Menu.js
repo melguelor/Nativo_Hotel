@@ -56,7 +56,7 @@ export default function Menu(props)
             </Nav.Item>
             <Nav.Item as="li">
                 <Nav.Link >
-                    <Link  style={{textDecoration: 'none'}}>Login</Link>
+                    <Link to="/servico"  style={{textDecoration: 'none'}}>Serviços</Link>
                 </Nav.Link>
             </Nav.Item>
 

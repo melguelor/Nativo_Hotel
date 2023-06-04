@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 
 export default function CaixaSelecao(
-    {fonte, campoExibir, funcaoSelecao,chave}
+    {fonte, campoExibir, funcaoSelecao,chave,nomeLabel}
 )
 {
 
@@ -16,12 +16,12 @@ export default function CaixaSelecao(
 
     console.log(fonte)
 
-
+   if(fonte || campoExibir || funcaoSelecao ||chave)
     return (
         <Container>
           
             <Form.Group  >
-                    <Form.Label>Seleciona o Hospede</Form.Label>
+                    <Form.Label>{nomeLabel}</Form.Label>
                     <Form.Select className="text-center" 
                     >
                         {

@@ -3,6 +3,7 @@ import{Table,Button,Modal,Form,Row } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import {useState,useEffect} from 'react'
 import CaixaSelecao from '../../Modelo/CaixaSelecao'
+import CarrinhoConsumo from "../CarrinhoConsumo";
 
 
 export default function Reg_reserva()
@@ -24,6 +25,10 @@ const [quarto, setQuarto] = useState('');
 const [qtdePessoa, setQtdePessoa] = useState('');
 const [nome, setNome] = useState('');
 const [idHospede,setIdHospede] = useState()
+
+
+
+
 
 const [lista, setLista] = useState([
   {
@@ -78,7 +83,7 @@ function consultarTodos()
       .then(response => response.json()) 
       .then(json => setListaHospede(json))
       .catch(err => console.log(err));
- console.log(listaHospede)
+ 
 
  return listaHospede
   
@@ -123,6 +128,31 @@ useEffect (() => {
  
 }, []);
 
+const meuEstado = {
+  nome: 'João',
+  idade: 25,
+  cidade: 'São Paulo'
+};
+
+
+
+function selecionaReserva(e)
+{    
+  const objetoString = JSON.stringify(e);
+ console.log(objetoString)
+ 
+
+  // Armazenando a string no localStorage
+  //localStorage.setItem('reservaLocal', objetoString);
+
+  //const id = e.currentTarget.value;
+
+
+
+}
+
+
+
 
 const [show, setShow] = useState(true);
 
@@ -135,11 +165,12 @@ const handleShow = () => setShow(true);
             <p className="text-center">Registros de Pessoas</p>
              <Table striped bordered hover variant="dark" size="sm">
       <thead>
-        <tr>
+        <tr className="text-center">
           <th>Nome Hospede</th>
           <th>data De Entrada</th>
           <th>Quarto</th>
           <th>Num Pessoas</th>
+          <th>Adicionar Consumo</th>
           <th>Excluir</th>
           <th>Alterar</th>
           
@@ -154,6 +185,20 @@ const handleShow = () => setShow(true);
         <td>{reserva.dataEntrada}</td>
         <td>{reserva.quarto}</td>
         <td>{reserva.qtdePessoa}</td>
+
+        <td className="text-center">
+         
+          <Link to={"/carrinhoconsumo"   }
+          
+          state={reserva}
+          
+          
+          
+          >Ir para outra página</Link>
+          
+          
+        
+        </td>
         <td className="text-center"><Button value={reserva.id} onClick={ e =>{excluir(e)}}> Excluir</Button></td>
         <td className="text-center"><Button  > Alterar</Button></td>
             

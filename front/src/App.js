@@ -2,6 +2,7 @@ import { Container,Row } from "react-bootstrap";
 import './fonte/addFont.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from "./Home";
+import CarrinhoConsumo from './Paginas/CarrinhoConsumo'
 
 
 import Cadastros from "./Paginas/Cadastros/Cadastros";
@@ -38,6 +39,8 @@ function App() {
           <Route path="/atividadecamareira" element={<AtividadeCamareira tituloPagina="Pessoa"/>}/>
           <Route path="/reserva" element={<Reserva tituloPagina="Reserva"/>}/>
           <Route path="/seleciona" element={<ExemploSelecao />} />
+          <Route path="/carrinhoconsumo" element={<CarrinhoConsumo  />}  />
+
           </Routes>
 
 
