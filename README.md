@@ -5,7 +5,7 @@
 - Relacionar base de banco de dados gerando resultados como: tabela muitos pra muitoS | muitos pra 1
 - Foi usado MVC | EXPRESS | NODE | FETCH | BOOTSTRAP 
 
-Avaliação Final: 8,0
+Avaliação Final:
 - Fui elogiado por explicar bem o topicos que eu desenvolvi em projeto solo
 - Elogiado pelo modo de programar onde programei mais que o necesssario que foi pedido
 - E entregas sem bugs
