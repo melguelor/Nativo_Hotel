@@ -12,7 +12,8 @@ import logo from './logo.png'
 
 export default function Menu(props)
 {
-
+        const logado = localStorage.getItem('login');
+        const tipo = 'funcionario'
     
     return(
         
@@ -20,8 +21,8 @@ export default function Menu(props)
             <div className='row fonteItim mt-1'>
                 <div className='col-2'>
                 <img src={logo}width="100%" className='mx-auto d-block'/>
-
                 </div>
+            
             
 
         <Nav defaultActiveKey="/home" as="ul" className='justify-content-center col align-items-center' >
@@ -56,7 +57,7 @@ export default function Menu(props)
             </Nav.Item>
             <Nav.Item as="li">
                 <Nav.Link >
-                    <Link to="/servico"  style={{textDecoration: 'none'}}>Serviços</Link>
+                    <Link to="/perfil"  style={{textDecoration: 'none'}}>Perfil</Link>
                 </Nav.Link>
             </Nav.Item>
 
@@ -69,8 +70,10 @@ export default function Menu(props)
 
         </div>
         
-        <div className='text-center'>{props.tituloPagina}</div>
-
+        <div className='text-center'>
+           
+            {props.tituloPagina}</div>
+<div className="text-white text-center">Perfil Logado:{logado} </div>
         </div>
         )
 

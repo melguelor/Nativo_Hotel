@@ -17,6 +17,8 @@ import ExemploSelecao from './Paginas/Cadastros/ExemploSelecao'
 import Reg_pessoa from "./Paginas/ExibicaoRegistros/reg_pessoa";
 import Reg_atividade from './Paginas/ExibicaoRegistros/reg_atividade'
 import Reg_reserva from "./Paginas/ExibicaoRegistros/reg_reserva";
+import Login from "./Paginas/Login";
+import Perfil from "./Paginas/Perfil"
 
 
 
@@ -40,6 +42,8 @@ function App() {
           <Route path="/reserva" element={<Reserva tituloPagina="Reserva"/>}/>
           <Route path="/seleciona" element={<ExemploSelecao />} />
           <Route path="/carrinhoconsumo" element={<CarrinhoConsumo  />}  />
+          <Route path="/login" element={<Login  />}  />
+          <Route path="/perfil" element={<Perfil  />}  />
 
           </Routes>
 

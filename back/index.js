@@ -9,6 +9,7 @@ import rotaAtividade from './Rotas/rotaAtividade.js'
 import rotaReserva from './Rotas/rotaReserva.js'
 import rotaProduto from './Rotas/rotaProduto.js'
 import rotaCarrinhoConsumo from './Rotas/rotaCarrinhoConsumo.js'
+import rotaLogin from './Rotas/rotaLogin.js'
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use('/pessoa',rotaPessoa)
 app.use('/reserva',rotaReserva)
 app.use('/produto',rotaProduto)
 app.use('/carrinhoConsumo',rotaCarrinhoConsumo)
+app.use('/login',rotaLogin)
 
 
 

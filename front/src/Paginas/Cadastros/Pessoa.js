@@ -16,6 +16,7 @@ export default function Pessoa(props)
     [tipo,setTipo] = useState(''),
     [telefone,setTelefone] = useState(''),
     [cpf,setCPF] = useState(''),
+    [senha,setSenha] = useState(''),
     
     [rua,setRua] = useState(''),
     [numero,setNumero] = useState(''),
@@ -141,6 +142,7 @@ export default function Pessoa(props)
                     Campo Obrigatorio
         </Form.Control.Feedback>
         </Form.Group>
+        
 
         <Form.Group >
         <Form.Control className="m-1" id="numero"  placeholder="Numero"
@@ -153,6 +155,17 @@ export default function Pessoa(props)
                     Campo Obrigatorio
         </Form.Control.Feedback>
       </Row>
+      <p className="">Senha</p>
+      <Form.Group className="mb-3 col-5 center">
+        <Form.Control className="m-1" id="senha"  placeholder="Digite sua senha"
+        onChange={e => setSenha(e.target.value)} required/>
+        <Form.Control.Feedback type="invalid"  >
+                    Campo Obrigatorio
+        </Form.Control.Feedback>
+        </Form.Group>
+<Form.Control.Feedback type="invalid"  >
+                    Campo Obrigatorio
+        </Form.Control.Feedback>
 
       
       <div className="text-center">
@@ -185,7 +198,7 @@ export default function Pessoa(props)
           <Button variant="secondary border" onClick={handleClose}>
             Fechar
           </Button>
-          <Link to="/reg_pessoa">
+          <Link to="/reserva">
           <Button variant="primary border" onClick={handleClose}>
             Vá Para Registros
           </Button>
