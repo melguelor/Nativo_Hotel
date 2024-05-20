@@ -35,6 +35,27 @@ export default function Pessoa(props)
 
   const [validated, setValidated] = useState(false);
 
+
+function salvarLogin()
+
+{
+
+  const lembrete = "cpf é login"
+  fetch('http://localhost:4000/login', {
+        method: "POST",
+        body: JSON.stringify(  {
+          login: cpf,
+          senha: senha,
+          lembrete: lembrete
+        }),
+        headers: {"Content-type": "application/json; charset=UTF-8"}
+      })
+      .then(response => response.json()) 
+      .then(json => console.log(json))
+      .catch(err => console.log(err.message));
+}
+
+
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -52,6 +73,10 @@ export default function Pessoa(props)
       .then(response => response.json()) 
       .then(json => console.log(json))
       .catch(err => console.log(err.message));
+        const lembrete = "login é cpf"
+        salvarLogin()
+
+      
         handleShow()
     }
     
