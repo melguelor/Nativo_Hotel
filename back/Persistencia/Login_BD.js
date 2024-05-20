@@ -7,7 +7,7 @@ export default class Login_BD
     async gravar(login)
     {
         if (login instanceof Login)
-        {console.log(login)
+        {   console.log("entrou no gravar do banco" + login.lembrete)
             const conexao = await conectar(),
                   sql = "INSERT INTO login (login, senha, lembrete) VALUES (?, ?, ?)",
                   valores = [login.login, login.senha, login.lembrete];

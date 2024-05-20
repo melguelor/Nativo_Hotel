@@ -17,8 +17,8 @@ export default function Login(props)
     {
       localStorage.setItem('login', "");
        fetch(`http://localhost:4000/login/${login}/${senha}`, {
-        method: "GET",
-       
+        method: "GET", 
+        
         headers: {"Content-type": "application/json;charset=UTF-8"}
       })
       .then(response => response.json()) 
@@ -26,7 +26,9 @@ export default function Login(props)
         if (json && login && senha) {
           
           if (json.login === login && json.senha === senha) {
+            localStorage.setItem('login', '');
             localStorage.setItem('login', login);
+            setLogin(login)
             handleClose();
 
           } else {

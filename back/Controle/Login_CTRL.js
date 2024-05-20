@@ -5,14 +5,14 @@ export default class Login_CTRL
     gravar(req, resp)
     {
         resp.type("application/json");
-        console.log(req.body)
+        console.log(req.params)
         if (req.is("application/json") && req.method === "POST")
         {
             const dados = req.body,
                   login = dados.login,
                   senha = dados.senha,
                   lembrete = dados.lembrete;
-
+                
             if (login && senha && lembrete)
             {
                 const novoLogin = new Login(login, senha, lembrete);
